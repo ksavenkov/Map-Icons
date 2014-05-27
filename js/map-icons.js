@@ -30,7 +30,8 @@ function Marker(options){
 		this.MarkerLabel = new MarkerLabel({
 			map: this.map,
 			marker: this,
-			text: options.label
+			text: options.label,
+      labelClass: options.labelClass
 		});
 		this.MarkerLabel.bindTo('position', this, 'position');
 	}
@@ -45,6 +46,18 @@ Marker.prototype.setMap = function() {
 	(this.MarkerLabel) && this.MarkerLabel.setMap.apply(this.MarkerLabel, arguments);
 };
 
+// Custom Marker SetPosition
+Marker.prototype.setPosition = function() {
+    google.maps.Marker.prototype.setPosition.apply(this, arguments);
+    (this.MarkerLabel) && (this.MarkerLabel.position = this.getPosition()) && this.MarkerLabel.draw();
+};
+
+// Custom Marker SetPosition
+Marker.prototype.setVisible = function() {
+    google.maps.Marker.prototype.setVisible.apply(this, arguments);
+    (this.MarkerLabel) && (this.MarkerLabel.div.style.display = arguments[0]?'block':'none');
+};
+
 // Marker Label Overlay
 var MarkerLabel = function(options) {
 	var self = this;
@@ -52,7 +65,7 @@ var MarkerLabel = function(options) {
 	
 	// Create the label container
 	this.div = document.createElement('div');
-	this.div.className = 'marker-label';
+	this.div.className = this.labelClass?this.labelClass:'marker-label';
 	var span = document.createElement('span');
 	span.className = "marker-icon";
 	this.div.appendChild(span);
