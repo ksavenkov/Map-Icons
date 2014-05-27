@@ -41,21 +41,26 @@ function Marker(options){
 inherits(Marker, google.maps.Marker);
 
 // Custom Marker SetMap
-Marker.prototype.setMap = function() {
+Marker.prototype.setMap = function(/*map*/) {
 	google.maps.Marker.prototype.setMap.apply(this, arguments);
 	(this.MarkerLabel) && this.MarkerLabel.setMap.apply(this.MarkerLabel, arguments);
 };
 
 // Custom Marker SetPosition
-Marker.prototype.setPosition = function() {
+Marker.prototype.setPosition = function(/*LatLng*/) {
     google.maps.Marker.prototype.setPosition.apply(this, arguments);
     (this.MarkerLabel) && (this.MarkerLabel.position = this.getPosition()) && this.MarkerLabel.draw();
 };
 
-// Custom Marker SetPosition
-Marker.prototype.setVisible = function() {
+// Custom Marker SetVisible
+Marker.prototype.setVisible = function(/*text*/) {
     google.maps.Marker.prototype.setVisible.apply(this, arguments);
     (this.MarkerLabel) && (this.MarkerLabel.div.style.display = arguments[0]?'block':'none');
+};
+
+// Change label text
+Marker.prototype.setLabel = function() {
+    (this.MarkerLabel) && (this.MarkerLabel.text = arguments[0]);
 };
 
 // Marker Label Overlay
