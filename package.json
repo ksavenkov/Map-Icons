@@ -1,0 +1,21 @@
+{
+  "name": "map-icons",
+  "version": "1.0.0",
+  "description": "MapIcons by scottdejonge",
+  "main": "js/map-icons.js",
+  "files": [
+    "js/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ksavenkov/map-icons"
+  },
+  "keywords": [
+  ],
+ "devDependencies": {
+  },
+  "dependencies": {
+  },
+  "peerDependencies": {
+  }
+}

@@ -115,3 +115,5 @@ MarkerLabel.prototype.draw = function() {
      div.style.zIndex = this.get('zIndex'); //ALLOW LABEL TO OVERLAY MARKER
      this.div.innerHTML = this.get('text').toString();
 };
+
+module.exports = Marker;
