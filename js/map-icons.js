@@ -49,7 +49,7 @@ Marker.prototype.setMap = function(/*map*/) {
 // Custom Marker SetPosition
 Marker.prototype.setPosition = function(latLng) {
     google.maps.Marker.prototype.setPosition(latLng);
-    (this.MarkerLabel) && (this.MarkerLabel.position = this.getPosition()) && this.MarkerLabel.draw();
+    latLng && (this.MarkerLabel) && (this.MarkerLabel.position = this.getPosition()) && this.MarkerLabel.draw();
 };
 
 // Custom Marker SetVisible
