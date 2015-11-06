@@ -47,9 +47,9 @@ Marker.prototype.setMap = function(/*map*/) {
 };
 
 // Custom Marker SetPosition
-Marker.prototype.setPosition = function(latLng) {
-    google.maps.Marker.prototype.setPosition(latLng);
-    latLng && (this.MarkerLabel) && (this.MarkerLabel.position = this.getPosition()) && this.MarkerLabel.draw();
+Marker.prototype.setPosition = function(/*LatLng*/) {
+    google.maps.Marker.prototype.setPosition.apply(this, arguments);
+    (this.MarkerLabel) && (this.MarkerLabel.position = this.getPosition()) && this.MarkerLabel.draw();
 };
 
 // Custom Marker SetVisible
