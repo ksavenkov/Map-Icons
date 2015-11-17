@@ -25,6 +25,19 @@ var inherits = function(childCtor, parentCtor) {
 };
 
 function Marker(options){
+  // lazy inheritance
+  // otherwise requiring this module w/o google (no network) breaks everything
+
+  if (typeof this.superClass_ === 'undefined') {
+    // Apply the inheritance
+    inherits(Marker, google.maps.Marker);
+  }
+  if (MarkerLabel.prototype === 'undefined') {
+    // Create MarkerLabel Object
+    MarkerLabel.prototype = new google.maps.OverlayView;
+  }
+
+
 	google.maps.Marker.apply(this, arguments);
 	if (options.custom_label) {
 		this.MarkerLabel = new MarkerLabel({
@@ -36,9 +49,6 @@ function Marker(options){
 		this.MarkerLabel.bindTo('position', this, 'position');
 	}
 }
-
-// Apply the inheritance
-inherits(Marker, google.maps.Marker);
 
 // Custom Marker SetMap
 Marker.prototype.setMap = function(/*map*/) {
@@ -81,9 +91,6 @@ var MarkerLabel = function(options) {
 		google.maps.event.trigger(self.marker, 'click');
 	});
 };
-
-// Create MarkerLabel Object
-MarkerLabel.prototype = new google.maps.OverlayView;
 
 // Marker Label onAdd
 MarkerLabel.prototype.onAdd = function() {
